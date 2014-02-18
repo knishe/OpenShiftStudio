@@ -1,0 +1,184 @@
+@charset "utf-8";
+/**
+ * 图标字体。
+ */
+@font-face {
+	font-family: 'clxy-icons';
+	src: url('../fonts/clxy-icons.eot');
+	src: url('../fonts/clxy-icons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/clxy-icons.ttf') format('truetype'), url('../fonts/clxy-icons.woff') format('woff'),
+		url('../fonts/clxy-icons.svg#clxy-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class*="clxyicon-"] {
+	position: relative;
+	display: inline-block;
+	font-family: 'clxy-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.clxyicon-rps-paper-inv:before {
+	content: "\e900";
+}
+
+.clxyicon-rps-rock-inv:before {
+	content: "\e901";
+}
+
+.clxyicon-rps-scissor-inv:before {
+	content: "\e902";
+}
+
+.clxyicon-rocket:before {
+	content: "\e903";
+}
+
+.clxyicon-yingyang:before {
+	content: "\e904";
+}
+
+.clxyicon-male:before {
+	content: "\e905";
+}
+
+.clxyicon-female:before {
+	content: "\e906";
+}
+
+.clxyicon-transformers:before {
+	content: "\e907";
+}
+
+.clxyicon-rps-rock:before {
+	content: "\e908";
+}
+
+.clxyicon-rps-paper:before {
+	content: "\e909";
+}
+
+.clxyicon-rps-scissor:before {
+	content: "\e90a";
+}
+
+.clxyicon-spinner1:before {
+	content: "\e90b";
+}
+
+.clxyicon-spinner2:before {
+	content: "\e90c";
+}
+
+.clxyicon-spinner3:before {
+	content: "\e90d";
+}
+
+.clxyicon-quill:before {
+	content: "\e90e";
+}
+
+.clxyicon-shit3:before {
+	content: "\e90f";
+}
+
+.clxyicon-happy:before {
+	content: "\e910";
+}
+
+.clxyicon-smiley:before {
+	content: "\e911";
+}
+
+.clxyicon-tongue:before {
+	content: "\e912";
+}
+
+.clxyicon-sad:before {
+	content: "\e913";
+}
+
+.clxyicon-wink:before {
+	content: "\e914";
+}
+
+.clxyicon-grin:before {
+	content: "\e915";
+}
+
+.clxyicon-cool:before {
+	content: "\e916";
+}
+
+.clxyicon-angry:before {
+	content: "\e917";
+}
+
+.clxyicon-evil:before {
+	content: "\e918";
+}
+
+.clxyicon-shocked:before {
+	content: "\e919";
+}
+
+.clxyicon-confused:before {
+	content: "\e91a";
+}
+
+.clxyicon-neutral:before {
+	content: "\e91b";
+}
+
+.clxyicon-wondering:before {
+	content: "\e91c";
+}
+
+.clxyicon-cat:before {
+	content: "\e91d";
+}
+
+.clxyicon-dog:before {
+	content: "\e91e";
+}
+
+.clxyicon-paw:before {
+	content: "\e91f";
+}
+
+.clxyicon-medalgold:before {
+	content: "\e920";
+}
+
+.clxyicon-medalsilver:before {
+	content: "\e921";
+}
+
+.clxyicon-medalbronze:before {
+	content: "\e922";
+}
+
+.clxyicon-shit1:before {
+	content: "\e923";
+}
+
+.clxyicon-shit2:before {
+	content: "\e924";
+}
+
+.clxyicon-podium:before {
+	content: "\e925";
+}
+
+.clxyicon-trophy:before {
+	content: "\e926";
+}

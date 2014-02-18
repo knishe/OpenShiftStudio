@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 显示层——Spring MVC——配置文件。 -->
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="message/message,message/validation" />
+		<!-- property name="defaultEncoding" value="UTF-8" / -->
+	</bean>
+
+	<!-- 自动扫描组件。追加命名规范方式。use-default-filters没有关闭。 -->
+	<context:component-scan base-package="cn.clxy.studio"
+		name-generator="cn.clxy.studio.common.aop.PackageNameGenerator">
+		<context:include-filter type="regex" expression=".*Action$" />
+	</context:component-scan>
+
+	<!-- <mvc:annotation-driven />的等价（100%？）配置。目的是为了自定义ActionScanner。 Start↓↓↓ -->
+	<bean id="jackson2Converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<bean name="handlerAdapter"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<property name="conversionService">
+					<bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+				</property>
+				<property name="validator">
+					<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+						<property name="validationMessageSource" ref="messageSource" />
+					</bean>
+				</property>
+				<property name="bindingErrorProcessor">
+					<bean class="cn.clxy.studio.common.web.BindingErrorProcessor" />
+				</property>
+			</bean>
+		</property>
+		<property name="messageConverters">
+			<list>
+				<ref bean="jackson2Converter" />
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean name="handlerMapping" class="cn.clxy.studio.common.action.ActionHandler">
+		<property name="interceptors">
+			<list>
+				<bean class="cn.clxy.studio.common.aop.LocaleInterceptor" />
+				<bean class="cn.clxy.studio.common.aop.AuthCheckInterceptor" />
+				<bean class="cn.clxy.studio.common.aop.ViewInterceptor">
+					<property name="defaultLayout" value="common/layout" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- End↑↑↑ <mvc:annotation-driven />的等价（100%？）配置。目的是为了自定义ActionScanner。 -->
+
+	<!-- View処理。１.拡張子よりJSON、２.最後にJSP。 Start↓↓↓ -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="${jsonSuffix}" value="application/json" />
+				<entry key="${csvExt}" value="text/csv" />
+				<entry key="${zipExt}" value="application/x-zip-compressed" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="cn.clxy.studio.common.web.CsvView" />
+				<bean class="cn.clxy.studio.common.web.ZipView" />
+			</list>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2" />
+		<property name="prefix" value="${jspPrefix}" />
+		<property name="suffix" value="${jspSuffix}" />
+	</bean>
+
+	<bean class="cn.clxy.studio.common.web.StartupListener" />
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<bean id="multipartResolver" p:defaultEncoding="utf-8"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/> -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources location="/favicon.ico" mapping="/favicon.ico" order="0" />
+
+	<!-- 補足用。@ControllerAdviceなど -->
+	<mvc:annotation-driven />
+</beans>

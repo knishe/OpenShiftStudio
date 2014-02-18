@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+.jumbotron {
+	margin: 0px;
+	margin-bottom: 10px;
+	padding: 30px 20px 10px;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 0 30px rgba(0, 0, 0, .075);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+	background: #002080 /*url(../img/bg2.jpg) no-repeat*/;
+	background-size: cover;
+}
+
+.jumbotron a {
+	color: #fff;
+}
+
+.jumbotron h1 {
+	font-size: 80px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 1;
+	font-family: Lucida Handwriting;
+}
+
+#philosophy {
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 1.25;
+	margin-bottom: 10px;
+}
+
+.section {
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
+	/*background-color: rgba(0, 0, 0, .1);*/
+	background-color: rgba(255, 255, 255, .3);
+	border-radius: 6px;
+	text-indent: 20px;
+	padding: 10px;
+	margin-top: 10px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .5)
+}

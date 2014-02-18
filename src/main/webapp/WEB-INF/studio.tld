@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>jstl functions library</description>
+	<display-name>jstl functions</display-name>
+	<tlib-version>2.0</tlib-version>
+	<short-name>sf</short-name>
+
+	<function>
+		<description>
+			エラーかメッセージを取得する。
+		</description>
+		<name>errorMessages</name>
+		<function-class>cn.clxy.studio.common.web.WebUtil</function-class>
+		<function-signature>java.util.List getErrors()</function-signature>
+		<example> ${sf:errorMessages()} </example>
+	</function>
+</taglib>

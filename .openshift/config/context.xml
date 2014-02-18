@@ -32,7 +32,7 @@
     -->
 
     <Resource name="jdbc/MysqlDS"
-              url="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
+              url="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}?characterEncoding=utf-8&#38;zeroDateTimeBehavior=round&#38;autoReconnect=true"
               driverClassName="com.mysql.jdbc.Driver"
               username="${OPENSHIFT_MYSQL_DB_USERNAME}"
               password="${OPENSHIFT_MYSQL_DB_PASSWORD}"
@@ -41,6 +41,8 @@
               maxActive="20"
               maxIdle="5"
               maxWait="10000"
+              testOnBorrow="true"
+              validationQuery="/* ping */SELECT 1"
               />
                
     <Resource name="jdbc/PostgreSQLDS"

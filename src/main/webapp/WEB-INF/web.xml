@@ -1,11 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="3.0"
-         xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         metadata-complete="false">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="false">
 
-         
+	<display-name>CLXY Sudio</display-name>
+	<description>Homepage of CLXY Sudio.</description>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!--配置Sring MVC的核心控制器DispatcherServlet -->
+	<servlet>
+		<servlet-name>studio</servlet-name>
+		<servlet-class>cn.clxy.studio.common.web.Servlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:app.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!--为DispatcherServlet建立映射 -->
+	<servlet-mapping>
+		<servlet-name>studio</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/common/systemException</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/notFound</location>
+	</error-page>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://studio.clxy.cn/functions</taglib-uri>
+			<taglib-location>/WEB-INF/studio.tld</taglib-location>
+		</taglib>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>false</el-ignored>
+			<page-encoding>UTF-8</page-encoding>
+			<scripting-invalid>false</scripting-invalid>
+			<include-prelude>/WEB-INF/jsp/common/common.jsp</include-prelude>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config>
+
+	<listener>
+		<listener-class>cn.clxy.studio.common.web.SessionListener</listener-class>
+	</listener>
 </web-app>
-

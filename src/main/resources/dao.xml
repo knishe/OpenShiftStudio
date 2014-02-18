@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<!-- 持久层——MyBatis——配置文件。 -->
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/MysqlDS</value>
+		</property>
+	</bean>
+	<jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
+		<jdbc:script location="classpath:schema.sql" />
+	</jdbc:initialize-database>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- define the SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="cn.clxy.studio.common.dao.MybatisDispatcher" />
+			</array>
+		</property>
+	</bean>
+
+	<!-- 自定义Dao扫描。注册并组装。 -->
+	<bean class="cn.clxy.studio.common.dao.Scanner">
+		<property name="basePackage" value="cn.clxy.studio.*.dao" />
+		<property name="excludeFilters">
+			<list>
+				<value><![CDATA[.*(?<!Dao)$]]></value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="daoHandler" class="cn.clxy.studio.common.dao.impl.Handlers">
+		<property name="handlers">
+			<list>
+				<bean class="cn.clxy.studio.common.dao.impl.PreHandler" />
+				<bean class="cn.clxy.studio.common.dao.impl.PaginationHandler">
+					<property name="dialect">
+						<bean class="cn.clxy.studio.common.dao.impl.LimitOffsetDialect" />
+					</property>
+				</bean>
+				<bean class="cn.clxy.studio.common.dao.impl.AutoSqlHandler" />
+			</list>
+		</property>
+	</bean>
+</beans>
