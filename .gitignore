@@ -4,3 +4,10 @@ target
 !.settings/.jsdtscope
 .project
 .classpath
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
