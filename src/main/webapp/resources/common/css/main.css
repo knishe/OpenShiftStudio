@@ -6,12 +6,14 @@ body {
 	/*因为调整过navbar的高度，这里需要联动。*/
 	padding-top: 50px;
 	/* 追加中文和日文字体 @注1 */
-	font-family: "Microsoft Yahei", "MS PGothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Microsoft Yahei", "MS PGothic", "Helvetica Neue",
+		Helvetica, Arial, sans-serif;
 }
 
 input,button,select,textarea {
 	/* 追加中文和日文字体 */
-	font-family: "Microsoft Yahei", "MS PGothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Microsoft Yahei", "MS PGothic", "Helvetica Neue",
+		Helvetica, Arial, sans-serif;
 }
 
 form {
@@ -51,7 +53,6 @@ table th,.panel-heading {
 	background: url(../img/logo.png) no-repeat center center;
 	background-size: 98px 30px;
 	text-indent: 70px;
-	float: right !important;
 }
 
 .navbar-inverse {
@@ -62,6 +63,10 @@ table th,.panel-heading {
 
 .navbar-nav .dropdown-menu {
 	min-width: 100px;
+}
+
+.navbar-right {
+	padding-right: 5px !important;
 }
 /*窗体中注释标签加粗。*/
 .control-label {
