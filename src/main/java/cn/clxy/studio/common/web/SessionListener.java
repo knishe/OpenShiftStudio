@@ -14,7 +14,6 @@ public class SessionListener implements HttpSessionListener {
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
 
-		// User user = GaeUtil.getUserByGae();
 		// WebUtil#setUser利用できないため。
 		event.getSession().setAttribute(WebUtil.KEY_USER, new User());
 	}

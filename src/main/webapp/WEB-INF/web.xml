@@ -56,6 +56,7 @@
 	</error-page>
 
 	<jsp-config>
+		<!-- Tomcat 7 低版本有Bug，会抛MalformedURLException -->
 		<taglib>
 			<taglib-uri>http://studio.clxy.cn/functions</taglib-uri>
 			<taglib-location>/WEB-INF/studio.tld</taglib-location>

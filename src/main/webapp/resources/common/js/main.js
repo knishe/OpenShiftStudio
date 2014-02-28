@@ -243,10 +243,10 @@ $(document).ready(function() {
 	csm.showMessage($("#messagesDataList").html(), true);
 
 	var colors = [ "#A30001", "#FF9900", "#47248F", "#002080" ];
-	var target = $(".navbar-inverse,.jumbotron").css("transition", "background-color 1.5s linear");
+	csm.bgTargets = $(".navbar-inverse,.jumbotron").css("transition", "background-color 1.5s linear");
 	setInterval(function() {
 		var color = colors.shift();
-		target.css("background-color", color);
+		csm.bgTargets.css("background-color", color);
 		colors.push(color);
 	}, 10000);
 });

@@ -66,6 +66,7 @@
 	</nav>
 </header>
 <script type="text/javascript">
+/*TODO OAuth2
 csm.ajax({
 	url : "common/authUrl.json",
 	success : function(data, status, xhr) {
@@ -73,4 +74,5 @@ csm.ajax({
 		$(".glyphicon-log-out").parent().attr("href", data.logoutUrl);
 	}
 });
+*/
 </script>

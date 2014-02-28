@@ -9,7 +9,7 @@
 		<link rel="shortcut icon" href="<c:url value='/resources/common/img/favicon.png'/>">
 		<script src="<c:url value='/resources/common/js/serversidejs.jsp'/>"></script>
 		<st:res type="js"
-				files="jquery-2.1.0.min, jquery-ui-1.10.3.custom, bootstrap.min, main" />
+				files="jquery-2.1.0.min, jquery-ui-1.10.3.custom, bootstrap, main" />
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<s:res type="js" files="html5shiv" />

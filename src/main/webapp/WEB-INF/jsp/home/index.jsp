@@ -46,25 +46,20 @@
 		$("#philosophy").html(phis[index]);
 	}
 
-	var colors = ["rgba(0,32,128, .3)", "rgba(255,153,0, .3)", "rgba(71,16,343, .3)", "rgba(163,0,1, .3)"];
 	var imgs = [ "bg3.jpg", "bg4.jpg", "bg5.jpg"];
-	var target = $(".jumbotron").css("transition", "background 1.5s linear");
 	function setBackground() {
-		var color = colors.shift();
 		var img = imgs.shift();
+		var target = $(".jumbotron").css("transition", "background 1.5s linear");
 		target.css({
-			"background-color": color,
-			background: "url(/resources/home/img/" + img + ") no-repeat",
+			background: "url(${imgBase}" + img + ") no-repeat",
 			"background-size": "cover"
 		});
-		colors.push(color);
 		imgs.push(img);
 	}
 
 	$(document).ready(function() {
 		setInterval(setPhilosophy, 10000);
 		$("#philosophy").click(setPhilosophy);
-
 		/*
 		 setInterval(function() {
 		 var row = $(".intro:eq(0)");
@@ -77,8 +72,8 @@
 		 }, 12000);
 		 */
 		setInterval(function() {
-			//setBackground();
-		}, 3000);
-		//setBackground();
+			setBackground();
+		}, 10000);
+		setBackground();
 	});
 </script>
