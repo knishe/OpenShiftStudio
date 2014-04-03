@@ -20,7 +20,7 @@ public final class PackageUtil {
 		if (index < 0) {
 			return name;
 		}
-		return name.substring(index);
+		return name.substring(index + 1);
 	}
 
 	/**
